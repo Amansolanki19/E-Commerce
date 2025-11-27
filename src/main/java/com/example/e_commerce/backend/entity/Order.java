@@ -1,12 +1,20 @@
 package com.example.e_commerce.backend.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
 @Entity
 @Table(name = "orders")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,3 +51,4 @@ public class Order{
 
     private LocalDateTime orderPlacedDate;
 }
+

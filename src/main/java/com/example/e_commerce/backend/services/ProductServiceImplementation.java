@@ -43,7 +43,7 @@ public class ProductServiceImplementation implements ProductService{
             secondLevelCategory.setName(product.getMidLevelCategory());
             secondLevelCategory.setParentCategory(topLevel);
             secondLevelCategory.setLevel(2);
-            secondLevel=categoryRepo.save(secondLevel);
+            secondLevel=categoryRepo.save(secondLevelCategory);
         }
 
         Category thirdLevel=categoryRepo.findByNameAndParent(product.getLowLevelCategory(),secondLevel.getName());
@@ -52,8 +52,8 @@ public class ProductServiceImplementation implements ProductService{
             thirLevelCategory.setName(product.getLowLevelCategory());
             thirLevelCategory.setParentCategory(secondLevel);
             thirLevelCategory.setLevel(3);
-
             thirLevelCategory=categoryRepo.save(thirLevelCategory);
+            thirdLevel = thirLevelCategory;
         }
 
         Product product1 = new Product();
@@ -84,13 +84,54 @@ public class ProductServiceImplementation implements ProductService{
     @Override
     public Product updateProduct(Long productId, Product product) throws ProductException {
         Product product1 = findProductById(productId);
-        if(product.getQuantity()!=0){
+        if (product.getTitle() != null && !product.getTitle().isBlank()) {
+            product1.setTitle(product.getTitle());
+        }
+
+        if (product.getDescription() != null && !product.getDescription().isBlank()) {
+            product1.setDescription(product.getDescription());
+        }
+
+        if (product.getPrice() != null && product.getPrice() > 0) {
+            product1.setPrice(product.getPrice());
+        }
+
+        if (product.getDiscountedPrice() != null && product.getDiscountedPrice() >= 0) {
+            product1.setDiscountedPrice(product.getDiscountedPrice());
+        }
+
+        if (product.getDiscount() != null && product.getDiscount() >= 0) {
+            product1.setDiscount(product.getDiscount());
+        }
+
+        if (product.getQuantity() != null) {
             product1.setQuantity(product.getQuantity());
         }
 
-        //Left fields will update later
+        if (product.getBrand() != null && !product.getBrand().isBlank()) {
+            product1.setBrand(product.getBrand());
+        }
 
-        return productRepo.save(product);
+        if (product.getColor() != null && !product.getColor().isBlank()) {
+            product1.setColor(product.getColor());
+        }
+
+        if (product.getSizes() != null && !product.getSizes().isEmpty()) {
+            product1.setSizes(product.getSizes());
+        }
+
+        if (product.getCategory() != null) {
+            Long catId = product.getCategory().getId();
+            if (catId != null) {
+                categoryRepo.findById(catId).ifPresent(product1::setCategory);
+            } else if (product.getCategory().getName() != null && !product.getCategory().getName().isBlank()) {
+                // try to find by name
+                Category c = categoryRepo.findByName(product.getCategory().getName());
+                if (c != null) product1.setCategory(c);
+            }
+        }
+
+        return productRepo.save(product1);
     }
 
     @Override

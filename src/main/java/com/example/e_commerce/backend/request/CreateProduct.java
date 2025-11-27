@@ -1,6 +1,8 @@
 package com.example.e_commerce.backend.request;
 
 import com.example.e_commerce.backend.entity.Size;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +25,7 @@ public class CreateProduct {
     private Integer quantity;
     private String brand;
     private String color;
+    @Nullable
     private Set<Size> size = new HashSet<>();
     private String topLevelCategory;
     private String midLevelCategory;

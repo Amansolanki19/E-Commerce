@@ -40,7 +40,7 @@ public class Product {
 
     @Embedded
     @ElementCollection
-    @Column(name = "size")
+    @Column(name = "size",nullable = true)
     private Set<Size> sizes= new HashSet<>();
 
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)

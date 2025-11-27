@@ -1,0 +1,49 @@
+{
+    "id": 1,
+    "title": "Men's Regular Fit T-Shirt",
+    "description": "Cotton regular fit t-shirt with round neck and short sleeves",
+    "price": 799.0,
+    "discountedPrice": 599.0,
+    "discount": 25.0,
+    "quantity": 120,
+    "brand": "Roadster",
+    "color": "Blue",
+    "createdAt": "2025-11-28T00:01:30.378372",
+    "sizes": [
+        {
+            "name": "L",
+            "quantity": null
+        },
+        {
+            "name": "S",
+            "quantity": null
+        },
+        {
+            "name": "M",
+            "quantity": null
+        },
+        {
+            "name": "XL",
+            "quantity": null
+        }
+    ],
+    "ratings": [],
+    "reviews": [],
+    "category": {
+        "id": 4,
+        "name": "T-Shirts",
+        "parentCategory": {
+            "id": 3,
+            "name": "Clothing",
+            "parentCategory": {
+                "id": 2,
+                "name": "Men",
+                "parentCategory": null,
+                "level": 1
+            },
+            "level": 2
+        },
+        "level": 3
+    },
+    "productRating": null
+}
