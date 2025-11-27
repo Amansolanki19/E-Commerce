@@ -13,14 +13,16 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 public class AppConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth
+                .sessionManagement(sm ->
+                        sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(Authorize -> Authorize
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll()
                 ).addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class)
@@ -32,7 +34,7 @@ public class AppConfig {
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration cfg = new CorsConfiguration();
                         cfg.setAllowedOrigins(Arrays.asList("http://localhost:1912"));
-                        cfg.setAllowedMethods(Arrays.asList("GET"));
+                        cfg.setAllowedMethods(Collections.singletonList("*"));
                         cfg.setAllowCredentials(true);
                         cfg.addAllowedHeader("*");
                         cfg.setExposedHeaders(Arrays.asList("Authorization"));

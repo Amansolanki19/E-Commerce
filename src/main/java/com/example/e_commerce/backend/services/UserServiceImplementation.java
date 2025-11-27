@@ -23,6 +23,6 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public Optional<User> findByEmail(String email) throws UserException {
-        return Optional.ofNullable(userRepo.findByEmail(email).orElseThrow(() -> new UserException("No user found with the email: " + email)));
+        return Optional.ofNullable(userRepo.findByEmail(email));
     }
 }

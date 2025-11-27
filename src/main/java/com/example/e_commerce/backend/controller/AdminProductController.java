@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/product")
+@RequestMapping("/api/admin/product")
 public class AdminProductController {
     @Autowired
     private ProductService productService;
@@ -54,6 +54,4 @@ public class AdminProductController {
         apiResponse.setStatus(true);
         return ResponseEntity.ok(apiResponse);
     }
-
-
 }
